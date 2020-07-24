@@ -1,0 +1,44 @@
+<script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function() {
+        // store a reference to the collapse div so that 
+        // we don't have to keep looking it up in the dom
+        const collapseExample = $("#c{{ramuh.id}}");
+
+        // register a callback function to the collapse div that
+        // will be called every time the collapse is opened.
+        collapseExample.on("shown.bs.collapse", function() {
+            // since we know that that this function is called on
+            // open, we'll set the localStorage value to "show" 
+            localStorage.setItem("c{{ramuh.id}}", "show");
+        });
+
+        // register a callback function to the collapse div that
+        // will be called every time the collapse is closed.
+        collapseExample.on("hidden.bs.collapse", function() {
+            // since we know that that this function is called on
+            // open, we'll set the localStorage value to "hide" 
+            localStorage.setItem("c{{ramuh.id}}", "hide");
+        });
+
+        // Since this function runs on page load (meaning only once), we can
+        // check the value of localStorage from here and then call the
+        // bootstrap collapse methods ourselves:
+
+        // Check the value of the localStorage item
+        const showExampleCollapse = localStorage.getItem("c{{ramuh.id}}");
+
+        // Manipulate the collapse based on the value of the localStorage item.
+        // Note that the value is determined by lines 36 or 44. If you change those,
+        // then make sure to check that the comparison on the next line is still valid.
+        if (showExampleCollapse === "show") {
+            collapseExample.collapse("show");
+        } else {
+            collapseExample.collapse("hide");
+        }
+      });
+    </script>

@@ -1,0 +1,88 @@
+{% extends "baseTemplate.html" %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Characters</h1>
+  <p>Click to Edit or create new Characters</p>
+</div>
+
+<style>
+    @media screen and (min-width: 768px) {
+        .modal-dialog {
+          width: 700px; /* New width for default modal */
+        }
+        .modal-sm {
+          width: 350px; /* New width for small modal */
+        }
+    }
+</style>
+
+{% comment %}    
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK"> {% endcomment %}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create Character</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title  w-100 text-center" id="exampleModalLabel">Enter Character</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/characters" method="post">
+         {% csrf_token %}
+        {{ form }}
+
+        <div class="col-lg-4 col-lg-offset-2">
+          <div class="form-group">
+            <label for="recipient-name  w-100 text-center" class="col-form-label">Name:</label>
+            <input id="name" type="text" name="name" value="{{ current_name }}">
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Job:</label>
+        
+            <select class="form-control" style="width:auto;" id="job" type="text" name="job" value="{{ current_job }}">
+            <option>Scholar</option>
+            <option>White Mage</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Weapon Damage:</label>
+            <input id="weapon_damage" type="text" name="weapon_damage" value="{{ current_weapon_damage }}">
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Mind:</label>
+            <input id="mind" type="text" name="mind" value="{{ current_mind }}">
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Determination:</label>
+            <input id="determination" type="text" name="determination" value="{{ current_determination }}">
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input class="btn btn-primary" type="submit" value="Submit">
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+ <p></p>
+ {% for character in character_list %}
+    <div class="list-group">
+    <a href="#" class="list-group-item">{{character.name}}</a>
+    </div>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "baseTemplate.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <h2>Ramuh</h2>
+    <p> Ramuh Timeline </p>
+    <hr>
+
+{% for ramuh in ramuh_list %}
+{% if ramuh.damage != 0 %}
+{% include "openScript.html" %}
+<div id="accordion">
+    <div class="card">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="card shadow p-0 bg-white rounded">
+    <div class="cols-md-2">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm">
+                {{ramuh.name}}
+            </div>
+            <div class="col-sm">
+            {{ramuh.damage|floatformat}}
+            </div>
+            <div class="col-sm">
+            {{ ramuh.time|date:"G:i"}} 
+            </div>
+            <div class="col-sm">
+               <a class="btn btn-primary" data-toggle="collapse" href="#c{{ramuh.id}}" role="button" aria-expanded="false" aria-controls="c{{ramuh.id}}">Toggle first element</a>
+            </div>
+            </div>
+            </div>
+            
+                <div class="collapse multi-collapse" id="c{{ramuh.id}}">
+                    <div class="card card-body">
+                    <div class="row">
+                        <div class="col-sm">
+                        <div class="list-group">
+                        <p>
+                            <div class="row no-gutters">
+                            <div class="fixed d-flex justify-content-center">
+                                GCD
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                GCD Ability dasd
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                oGCD 1
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                oGCD 2
+                            </div>
+                            </div>
+                            {% for time, move in op_weave.items %}
+                                {% if move != '' %}
+                                    {% if time == 0 and ramuh.id == 1%}
+                                    <div class="row no-gutters">
+                                        <div class="fixed">
+                                        <a data-target="#test" data-toggle="modal" id="test" 
+                                        href="#test" class="list-group-item list-group-item-action list-group-item-success">{{time|floatformat}}s </a>
+
+
+
+                                        </div>
+                                        <div class="col">
+                                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                    </div>
+                                    {% elif time|add:"3" <= ramuh.time_seconds_next_damage and time >= ramuh.time_seconds %}
+                                    <div class="row no-gutters">
+                                       <div class="fixed">
+                                        <a href="#" class="list-group-item list-group-item-action list-group-item-success">{{time|floatformat}}s</a>
+                                        </div>
+                                        <div class="col">
+                                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                    </div>
+                                    {% elif  time|add:"3" >= ramuh.time_seconds and  time|add:"3" <= ramuh.time_seconds_next_damage %}
+                                    <div class="row no-gutters">
+                                       <div class="fixed">
+                                        <a href="#" class="list-group-item list-group-item-action list-group-item-success">{{time|floatformat}}s</a>
+                                        </div>
+                                        <div class="col">
+                                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
+                                        </div>
+                                    </div>
+                                    {% endif %} 
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        </div>
+                        <!----Modal-->
+
+                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#co{{ramuh.id}}">
+                            {{ramuh.id}}
+                            </button>
+                        </div>
+                        <div class="col-sm">
+                            Heal Moves
+                        </div>
+                    </div>
+                    </div>
+            </div>  
+</div> 
+</div>
+</div>
+</div> 
+</div>
+{% endif %}
+{% endfor %}
+</div>
+                                      
+{% include "modal.html" %}
+
+{% endblock %}
