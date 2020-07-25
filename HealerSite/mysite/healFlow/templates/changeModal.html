@@ -1,0 +1,42 @@
+
+<div class="modal fade" id="y{{ramuh.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ramuh.id}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form role ="form" method="POST">
+         {% csrf_token %}
+        {{ form }}
+         <div class="form-group">
+         </input>
+            <label for="time" class="col-form-label">GCD:</label>
+            <select class="form-control"  id="bookID" type="text" name="time">
+         {% for time, move in gcd_with_move.items %}
+                {% if time == 0 and ramuh.id == 1%}
+                   <option> {{time|floatformat}}s - {{move}} </option>
+                {% elif time|add:"3" <= ramuh.time_seconds_next_damage and time >= ramuh.time_seconds %}
+                    {% if move != '' %}
+                          <option> {{time|floatformat}}s - {{move}} </option>
+                    {% else %}
+                          <option> {{time|floatformat}}s
+                    {% endif %}
+                {% elif  time|add:"3" >= ramuh.time_seconds and  time|add:"3" <= ramuh.time_seconds_next_damage %}
+                    {% if move != '' %}
+                              <option> {{time|floatformat}}s - {{move}} </option>
+                    {% else %}
+                          <option> {{time|floatformat}}s
+                    {% endif %}
+                {% endif %} 
+          {% endfor %}
+          </select>
+            </form>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>

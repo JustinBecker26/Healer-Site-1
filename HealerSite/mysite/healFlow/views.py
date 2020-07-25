@@ -88,4 +88,4 @@ def timeline(request):
             times_names, request.POST.get('name'), request.POST.get('time'))
         abil_line.save()
         return HttpResponseRedirect("/timeline")
-    return render(request, 'timeline.html', {'ramuh_list': ramuh_list, 'op_weave': times_names, 'gcd_with_move': gcd_list_with_move, 'weave_list': weave_list})
+    return render(request, 'timeline.html', {'ramuh_list': ramuh_list, 'op_weave': times_names, 'gcd_with_move': gcd_list_with_move, 'weave_list': weave_list, 'gcd_list': gcd_list})
