@@ -78,12 +78,41 @@ def convertString(in_list):
     return str(in_list)
 
 
-def createNewList(abil_line, abil, time):
+def createNewList(abil_line, abil, time ):
     times = []
-    for k, v in abil_line.items():
-        if v == abil:
-            times.append(k)
-        if k == (int(time[0:4].replace("s", ''))):
-            times.append(k)
+    other_abil = "@" + abil
+    for time1, abils in abil_line.items():
+        if time1 == (int(time[0:4].replace("s", ''))):
+            times.append(time1)
+        else:    
+            for a in abils:
+                if a == abil or a == other_abil:
+                    times.append(time1)
     times = convertString(times)
     return times
+
+
+def switchTime(abil_line, time_swap, abils):
+    times = time_swap.split(" ")
+    time1 = int(times[0])
+    time2 = int(times[1])
+    times_1 = []
+    times_2 = []
+    if abils[0] == abils[1]:
+        for time, ability in abil_line.items():
+            if abils[0] == ability:
+                times_1.append(time)
+    times_1 = convertString(times_1)
+    return times_1, times_2
+        
+def getAbilities(abil_line, times):
+    abils = ["", ""]
+    times = times.split(" ")
+    time1 = int(times[0])
+    time2 = int(times[1])
+    for time, ability in abil_line.items():
+        if time == time1:
+            abils[0] = ability
+        if time == time2:
+            abils[1] = ability
+    return abils

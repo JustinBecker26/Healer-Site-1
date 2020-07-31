@@ -45,7 +45,16 @@
             {% endfor %}
           </select>
           </div>
-      </div> 
+      <div class="form-group">
+        <label for="ogcd1" class="col-form-label">oGCD 1:</label>
+        <select class="form-control"  id="ogcd1" type="text" name="ogcd1">
+        <option> None</option>
+        {% for ogcd in ogcd_list %}
+          <option> {{ogcd.name}}</option>
+        {% endfor %}
+      </select>
+      </div>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <input class="btn btn-primary" type="submit" value="Submit">

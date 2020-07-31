@@ -1,0 +1,18 @@
+<style>
+    .dropdown-menu {         
+        max-height: 300px;
+        overflow-y: auto;
+      }
+    </style>
+
+<div class="dropdown-menu" aria-labelledby="ogcd2">
+    <form role ="form" method="POST">
+        {% csrf_token %}
+       {{ form }}
+    <div class="form-group">
+{% for move in ogcd_list %}
+    <button class="dropdown-item" type="submit" name="ogcd2_change" value="{{move.name}} {{time}}" >{{move.name}}</button>
+{% endfor %}
+    </div>
+    </form>
+</div>

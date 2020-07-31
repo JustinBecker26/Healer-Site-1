@@ -2,11 +2,39 @@
 {% block content %}
 {% load static %}
 <link href=" {%static 'style.css'%}" rel="stylesheet">
+<style>.thing    {
+	width: 115px;
+	height: 50px;
+    text-align: center;
+    white-space: nowrap;
+}</style>
+<style>.smaller {
+	width: 75px;
+	height: 50px;
+    white-space: nowrap;
+}</style>
+<style>.smallerer {
+	width: 75px;
+	height: 10px;
+    text-align: center;
+}</style>
+<style>.thing2 {
+	width: 115px;
+	height: 25px;
+    text-align: center;
+}</style>
 <div class="container">
     <h2>Ramuh</h2>
     <p> Ramuh Timeline </p>
     <hr>
-
+<style>
+    @media (max-width: 500px) {
+    .dropdown-menu{
+          height:200px;
+          overflow-y:auto;
+       }
+    }
+</style>
 {% for ramuh in ramuh_list %}
 <script>
 //triggered when modal is about to be shown
@@ -21,7 +49,7 @@ $('#y{{ramuh.id}}').on('show.bs.modal', function(e) {
 </script>
 {% if ramuh.damage != 0 %}
 {% include "openScript.html" %}
-{% include "changeModal.html" %}
+
 <div id="accordion">
     <div class="card">
     <div class="row">
@@ -52,73 +80,20 @@ $('#y{{ramuh.id}}').on('show.bs.modal', function(e) {
                         <div class="list-group">
                         <p>
                             <div class="row no-gutters">
-                            <div class="fixed d-flex justify-content-center">
+                            <div class=" smallerer">
                                 GCD
                             </div>
-                            <div class="col d-flex justify-content-center">
-                                GCD Ability dasd
+                            <div class="thing2">
+                                GCD Ability
                             </div>
-                            <div class="col d-flex justify-content-center">
+                            <div class="thing2">
                                 oGCD 1
                             </div>
-                            <div class="col d-flex justify-content-center">
+                            <div class="thing2">
                                 oGCD 2
                             </div>
                             </div>
-                            {% for time, move in op_weave.items %}
-                                {% if move != '' %}
-                                    {% if time == 0 and ramuh.id == 1%}
-                                    <div class="row no-gutters">
-                                        <div class="fixed">
-                                        <a data-target="#y{{ramuh.id}}" data-toggle="modal" id="test" 
-                                        href="timeline/1" class="list-group-item list-group-item-action list-group-item-success" data-book-id="my_id_value">{{time|floatformat}}s </a>
-                                         
-                                        </div>
-                                        <div class="col">
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                    </div>
-                                    {% elif time|add:"3" <= ramuh.time_seconds_next_damage and time >= ramuh.time_seconds %}
-                                    <div class="row no-gutters">
-                                       <div class="fixed">
-                                        <a data-target="#co{{ramuh.id}}" data-toggle="modal" id="test" 
-                                        href="#" class="list-group-item list-group-item-action list-group-item-success">{{time|floatformat}}s </a>
-                                        </div>
-                                        <div class="col">
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                    </div>
-                                    {% elif  time|add:"3" >= ramuh.time_seconds and  time|add:"3" <= ramuh.time_seconds_next_damage %}
-                                    <div class="row no-gutters">
-                                       <div class="fixed">
-                                        <a data-target="#co{{ramuh.id}}" data-toggle="modal" id="test" 
-                                        href="#" class="list-group-item list-group-item-action list-group-item-success">{{time|floatformat}}s </a>
-                                        </div>
-                                        <div class="col">
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{move}} </a>
-                                        </div>
-                                    </div>
-                                    {% endif %} 
-                                {% endif %}
-                            {% endfor %}
+                            {% include "buttonGrid.html" %}          
                         </p>
                         </div>
                         <!----Modal-->

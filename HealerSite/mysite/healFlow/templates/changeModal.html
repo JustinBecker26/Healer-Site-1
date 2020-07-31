@@ -13,11 +13,11 @@
          {% csrf_token %}
         {{ form }}
          <div class="form-group">
-         </input>
+         </input> 
             <label for="time" class="col-form-label">GCD:</label>
             <select class="form-control"  id="bookID" type="text" name="time">
          {% for time, move in gcd_with_move.items %}
-                {% if time == 0 and ramuh.id == 1%}
+                {% if time == 0 and ramuh.id == 1 %}
                    <option> {{time|floatformat}}s - {{move}} </option>
                 {% elif time|add:"3" <= ramuh.time_seconds_next_damage and time >= ramuh.time_seconds %}
                     {% if move != '' %}

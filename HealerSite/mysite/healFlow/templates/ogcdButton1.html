@@ -1,0 +1,13 @@
+{% if "@" in move.1 %}
+<div class="dropdown show">
+    <a  id="ogcd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+    href="#" class="list-group-item list-group-item-action list-group-item-primary" data-book-id="my_id_value">{{move.1|slice:"1:50"}} </a>
+    {% include "dropdownOgcd.html" %}
+</div>
+{% else %}
+<div class="dropdown show">
+<a id="ogcd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+href="#" class="list-group-item list-group-item-action list-group-item-primary">None </a>
+{% include "dropdownOgcd.html" %}
+</div>
+{% endif %}

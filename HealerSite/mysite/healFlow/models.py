@@ -28,10 +28,13 @@ class Abilities(models.Model):
     weave = models.FloatField(null=0)
     duration = models.FloatField(null=0)
     optimalWeave = models.FloatField(null=0)
+    
 
 
 class AbilityTimeline(models.Model):
     boss = models.CharField(max_length=200)
     ability = models.CharField(max_length=200)
     times = models.CharField(validators=[int_list_validator], max_length=100)
+    ogcd = models.FloatField(null=0, default=0)
+    ogcdPosition = models.FloatField(null=0, default=0)
     made = models.BooleanField(default=False)

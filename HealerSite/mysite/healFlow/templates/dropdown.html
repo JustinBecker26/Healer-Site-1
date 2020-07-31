@@ -1,0 +1,40 @@
+<style>
+.dropdown-menu {         
+    max-height: 300px;
+    overflow-y: auto;
+  }
+</style>
+
+<div class="dropdown-menu" aria-labelledby="test">
+    <form role ="form" method="POST">
+        {% csrf_token %}
+       {{ form }}
+    <div class="form-group">
+    {% for time1, move1 in gcd_with_move.items %}
+    {% if time1 == 0 and ramuh.id == 1%}
+    <button class="dropdown-item" type="submit" name="time_change" value="{{time}} {{time1}}" >{{time1|floatformat}}s - {{move1}}</button>
+    {% elif time1|add:"3" <= ramuh.time_seconds_next_damage and time1 >= ramuh.time_seconds %}
+        {% if move1 != '' %}
+        <button class="dropdown-item" type="submit" name="time_change" value="{{time}} {{time1}}" >{{time1|floatformat}}s - {{move1}}</button>
+        {% else %}
+        <button class="dropdown-item" type="submit" name="time_change" value="{{time}} {{time1}}" >{{time1|floatformat}}s - {{move1}}</button>
+        {% endif %}
+    {% elif  time1|add:"3" >= ramuh.time_seconds and  time1|add:"3" <= ramuh.time_seconds_next_damage %}
+        {% if move1 != '' %}
+        <button class="dropdown-item" type="submit" name="time_change" value="{{time}} {{time1}}" >{{time1|floatformat}}s - {{move1}}</button>
+        {% else %}
+        <button class="dropdown-item" type="submit" name="time_change" value="{{time}} {{time1}}" >{{time1|floatformat}}s - {{move1}}</button>
+        {% endif %}
+    {% endif %} 
+{% endfor %}
+    </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+

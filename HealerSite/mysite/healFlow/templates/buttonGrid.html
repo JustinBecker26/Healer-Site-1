@@ -1,0 +1,47 @@
+{% for time, move in op_weave.items %}
+    {% if move.0 != '' %}
+        {% if time == 0 and ramuh.id == 1%}
+        <div class="row no-gutters">
+           {% include "timeButton.html" %}
+        </div>
+            <div class="thing ">
+                {% include "moveButton.html" %}        
+              </div>
+            <div class="thing">
+               {% include "ogcdButton1.html" %}
+            </div>
+            <div class="thing">
+                {% include "ogcdButton2.html" %}                                 
+            </div>
+        </div>
+        {% elif time|add:"3" <= ramuh.time_seconds_next_damage and time >= ramuh.time_seconds %}
+        <div class="row no-gutters">
+            {% include "timeButton.html" %}
+            </div>
+            <div class="thing">
+                {% include "moveButton.html" %} 
+            </div>
+            <div class="thing">
+                {% include "ogcdButton1.html" %}                                 
+            </div>
+            <div class="thing">
+                {% include "ogcdButton2.html" %}                           
+          </div>
+        </div>
+        {% elif  time|add:"3" >= ramuh.time_seconds and  time|add:"3" <= ramuh.time_seconds_next_damage %}
+        <div class="row no-gutters">
+            {% include "timeButton.html" %}
+            </div>
+            <div class="thing">
+                {% include "moveButton.html" %} 
+            </div>
+            <div class="thing">
+                {% include "ogcdButton1.html" %}                                      
+            </div>
+            <div class="thing">
+                {% include "ogcdButton2.html" %}                                         
+             </div>
+        </div>
+        {% endif %} 
+    {% endif %}
+{% endfor %}
